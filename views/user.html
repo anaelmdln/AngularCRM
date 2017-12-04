@@ -1,0 +1,46 @@
+<div class="col-xs-6">
+	<h2><a href="#!/">Home</a></h2>
+	<div class="col-xs-6 card">
+		<div class="card_container">
+			<p>{{ userController.user.name }}</p>
+			<img ng-cloak src="{{ userController.user.photo }}" alt="Photo of {{ userController.user.name }}" height="100px">
+			<p><small>{{ userController.user.email }}</small></p>
+			<p>Phone: {{ userController.user.phone }}</p>
+			<p>Description:</p>
+			<p>{{ userController.user.description }}</p>
+			<p>{{ (userController.user.gifs.length)?'Has ' + userController.user.gifs.length + ' gifs as favorites.':'' }}</p>
+			<p>{{ (userController.user.comics.length)?'Has ' + userController.user.comics.length + ' comics as favorites.':'' }}</p>
+		</div>
+	</div>
+</div>
+<div class="col-xs-6">
+	<div class="col-xs-12">
+		<h2>Gif user list</h2>
+		<div class="col-xs-12 list">
+			<div class="col-xs-3" ng-repeat="gif in userController.user.gifs track by gif.id">
+				<div class="gif_container" ng-click="userController.removeFavorite($event, gif)">
+					<video src="{{ gif.url }}" autoplay="autoplay" loop="infinite"></video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<h2>Gif list: <small>{{ userController.gifs.pagination.total_count }} on page {{ userController.page }}</small></h2>
+		<form name="gif_search" class="form-linear">
+			<div class="form-group">
+				<label for="search">Search:</label>
+				<input class="form-control" type="text" id="search" ng-model="userController.search">
+			</div>
+			<button id="updateBtn" type="submit" class="btn btn-primary" ng-click="userController.update($event)">Search</button>
+			<button id="prevBtn" type="button" class="btn btn-default" ng-click="userController.prev($event)">Prev</button>
+			<button id="nextBtn" type="button" class="btn btn-default" ng-click="userController.next($event)">Next</button>
+		</form>
+	</div>
+	<div class="col-xs-12">
+		<div class="col-xs-3" ng-repeat="gif in userController.gifs.data track by gif.id">
+			<div class="gif_container" ng-click="userController.addFavorite($event, gif)">
+				<video src="{{ gif.images.preview.mp4 }}" autoplay="autoplay" loop="infinite"></video>
+			</div>
+		</div>
+	</div>
+</div>

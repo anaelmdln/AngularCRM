@@ -1,0 +1,39 @@
+<div class="col-xs-6">
+	<h2>User list</h2>
+	<div class="col-xs-6 card" ng-repeat="user in homeController.users">
+		<div class="card_container">
+			<p>{{ user.name }}</p>
+			<img ng-cloak src="{{ user.photo }}" alt="Photo of {{ user.name }}" height="100px">
+			<p><small>{{ user.email }}</small></p>
+			<p>{{ (user.gifs.length)?'Has ' + user.gifs.length + ' gifs as favorites.':'' }}</p>
+			<p>{{ (user.comics.length)?'Has ' + user.comics.length + ' comics as favorites.':'' }}</p>
+			<button id="editBtn" type="button" class="btn btn-warning" ng-click="homeController.edit($event, user.id)">Edit</button>
+			<a class="btn btn-info" href="#!/user/{{user.id}}">Show</a>
+			<button id="removeBtn" type="button" class="btn btn-danger" ng-click="homeController.remove($event, user.id)">Remove</button>
+		</div>
+	</div>
+</div>
+<div class="col-xs-6">
+	<h2>Create user</h2>
+	<form name="input_user_form">
+		<div class="form-group">
+			<label for="name">Name:</label>
+			<input class="form-control" type="text" id="name" ng-model="homeController.input_user.name">
+		</div>
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input class="form-control" type="text" id="email" ng-model="homeController.input_user.email">
+		</div>
+		<div class="form-group">
+			<label for="phone">Phone:</label>
+			<input class="form-control" type="text" id="phone" ng-model="homeController.input_user.phone">
+		</div>
+		<div class="form-group">
+			<label for="description">Description:</label>
+			<textarea class="form-control" type="text" id="description" ng-model="homeController.input_user.description"></textarea>
+		</div>
+		<button id="createBtn" type="submit" class="btn btn-primary" ng-click="homeController.create($event, homeController.input_user)">Create</button>
+		<button id="saveBtn" type="button" class="btn btn-success" ng-click="homeController.save($event, homeController.input_user)" disabled="disabled">Save</button>
+		<button id="cancelBtn" type="button" class="btn btn-warning" ng-click="homeController.cancel($event)" disabled="disabled">Cancel</button>
+	</form>
+</div>
