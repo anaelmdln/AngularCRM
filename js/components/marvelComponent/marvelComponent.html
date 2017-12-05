@@ -1,0 +1,29 @@
+<div class="col-xs-12 hide" id="comics_view">
+	<div class="col-xs-4">
+		<h3>Comics user list</h3>
+		<div class="col-xs-12 list">
+			<div class="col-xs-12" ng-repeat="comic in marvelComponent.user.comics track by comic.id">
+				<div class="comic_container" ng-click="marvelComponent.removeFavoriteComic($event, comic)">
+					<img src="{{ comic.url }}" alt="{{ comic.alt }}">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-8">
+		<h3>Comic list: <small>{{ marvelComponent.comics.total }} on page {{ marvelComponent.page }}</small></h3>
+		<form name="gif_search" class="form-inline">
+			<div class="form-group">
+				<label for="search_comics">Search:</label>
+				<input class="form-control" type="text" id="search_comics" ng-model="marvelComponent.search">
+			</div>
+			<button type="submit" class="btn btn-primary" ng-click="marvelComponent.update($event)">Search</button>
+			<button type="button" class="btn btn-default" ng-click="marvelComponent.prev($event)">Prev</button>
+			<button type="button" class="btn btn-default" ng-click="marvelComponent.next($event)">Next</button>
+		</form>
+		<div class="col-xs-4" ng-repeat="comic in marvelComponent.comics.results track by comic.id">
+			<div class="comic_container" ng-click="marvelComponent.addFavoriteComic($event, comic)">
+				<img src="{{ comic.images[0].path + '/portrait_xlarge.' + comic.images[0].extension }}" alt="{{comic.title}}">
+			</div>
+		</div>
+	</div>
+</div>
