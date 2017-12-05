@@ -1,8 +1,6 @@
 # Proyecto de Angular 1.6
 > Desarrollador durante curso de Desarrollo Web Frontend 2ª edición
 
-[TOC]
-
 #### Uso de APIs
 
 - [Giphy](https://github.com/Giphy/GiphyAPI "Giphy")
