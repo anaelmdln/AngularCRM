@@ -1,7 +1,6 @@
 let NgAppConfigs = {
 	marvel: {
-		publicKey: 'publicKey',
-		privateKey: 'privateKey'
+		publicKey: 'publicKey'
 	},
 	giphy: {
 		apiKey: 'apiKey'

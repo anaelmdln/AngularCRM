@@ -17,14 +17,20 @@
 	align-items: center;
 	justify-content: center;
 }
+.form-inline {
+	text-align: center;
+}
 .gif_container video {
 	max-height: 100%;
 	max-width: 100%;
 	width: auto;
 	height: auto;
 }
+.comic_container {
+	padding: 5px;
+}
 .list {
-	height: 150px;
+	height: 500px;
 	overflow-y: auto;
 }
 button[disabled="disabled"] {

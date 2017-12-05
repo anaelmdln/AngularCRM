@@ -12,9 +12,9 @@
 			controllerAs: 'homeController'
 		})
 		.when('/user/:id', {
-			controller: 'UserController',
+			controller: 'UsersController',
 			templateUrl: '/views/user.html',
-			controllerAs: 'userController'
+			controllerAs: 'usersController'
 		});
 	}
 
