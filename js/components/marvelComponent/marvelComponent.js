@@ -5,46 +5,30 @@
 		controller: marvelComponent,
 		controllerAs: 'marvelComponent',
 		bindings: {
-			user: '='
+			user: '=',
+			addFavoriteComic: '&',
+			removeFavoriteComic: '&'
 		}
 	});
 
-	marvelComponent.inject = ['MarvelFactory', 'UserFactory'];
+	marvelComponent.inject = ['MarvelFactory'];
 
-	function marvelComponent(MarvelFactory, UserFactory) {
+	function marvelComponent(MarvelFactory) {
 		let vm = this;
 		vm.page = 1;
 		vm.search = '';
 		vm.next = next;
 		vm.prev = prev;
 		vm.update = update;
-		vm.addFavoriteComic = addFavoriteComic;
-		vm.removeFavoriteComic = removeFavoriteComic;
+		vm.addFavorite = addFavorite;
+		vm.removeFavorite = removeFavorite;
 
-		init();
-
-		function init() {
-			vm.page = 1;
+		function addFavorite($event, comic) {
+			vm.addFavoriteComic({'event': $event, 'comic': comic});
 		}
 
-		function addFavoriteComic($event, comic) {
-			let user = JSON.parse(JSON.stringify(vm.user));
-			if (!user.comics) user.comics = [];
-			let index = user.comics.findIndex(item => item.id == comic.id);
-			if (index !== -1) return null;
-			user.comics.push({
-				id: comic.id,
-				url: (comic.images[0] !== undefined) ? comic.images[0].path + '/portrait_xlarge.' + comic.images[0].extension : '',
-				alt: comic.title
-			});
-			UserFactory.save(user).then(response => vm.user = user);
-		}
-
-		function removeFavoriteComic($event, comic) {
-			let user = JSON.parse(JSON.stringify(vm.user));
-			let index = user.comics.findIndex(item => item.id == comic.id);
-			user.comics.splice(index, 1);
-			UserFactory.save(user).then(response => vm.user = user);
+		function removeFavorite($event, comic) {
+			vm.removeFavoriteComic({'event': $event, 'comic': comic});
 		}
 
 		function next($event) {

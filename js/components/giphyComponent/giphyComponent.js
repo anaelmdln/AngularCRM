@@ -5,46 +5,30 @@
 		controller: giphyComponent,
 		controllerAs: 'giphyComponent',
 		bindings: {
-			user: '='
+			user: '=',
+			addFavoriteGif: '&',
+			removeFavoriteGif: '&'
 		}
 	});
 
-	giphyComponent.inject = ['GiphyFactory', 'UserFactory'];
+	giphyComponent.inject = ['GiphyFactory'];
 
-	function giphyComponent(GiphyFactory, UserFactory) {
+	function giphyComponent(GiphyFactory) {
 		let vm = this;
 		vm.page = 1;
 		vm.search = '';
 		vm.next = next;
 		vm.prev = prev;
 		vm.update = update;
-		vm.addFavoriteGif = addFavoriteGif;
-		vm.removeFavoriteGif = removeFavoriteGif;
+		vm.addFavorite = addFavorite;
+		vm.removeFavorite = removeFavorite;
 
-		init();
-
-		function init() {
-			vm.page = 1;
+		function addFavorite($event, gif) {
+			vm.addFavoriteGif({'event': $event, 'gif': gif});
 		}
 
-		function addFavoriteGif($event, gif) {
-			let user = JSON.parse(JSON.stringify(vm.user));
-			if (!user.gifs) user.gifs = [];
-			let index = user.gifs.findIndex(item => item.id == gif.id);
-			if (index !== -1) return null;
-			user.gifs.push({
-				id: gif.id,
-				url: gif.images.preview.mp4,
-				alt: gif.title
-			});
-			UserFactory.save(user).then(response => vm.user = user);
-		}
-
-		function removeFavoriteGif($event, gif) {
-			let user = JSON.parse(JSON.stringify(vm.user));
-			let index = user.gifs.findIndex(item => item.id == gif.id);
-			user.gifs.splice(index, 1);
-			UserFactory.save(user).then(response => vm.user = user);
+		function removeFavorite($event, gif) {
+			vm.removeFavoriteGif({'event': $event, 'gif': gif});
 		}
 
 		function next($event) {

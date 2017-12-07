@@ -1,10 +1,10 @@
-<div class="col-xs-12 hide" id="comics_view">
+<div class="col-xs-12">
 	<div class="col-xs-4">
 		<h3>Comics user list</h3>
 		<div class="col-xs-12 list">
 			<div class="col-xs-12" ng-repeat="comic in marvelComponent.user.comics track by comic.id">
-				<div class="comic_container" ng-click="marvelComponent.removeFavoriteComic($event, comic)">
-					<img src="{{ comic.url }}" alt="{{ comic.alt }}">
+				<div class="comic_container" ng-click="marvelComponent.removeFavorite($event, comic)">
+					<img ng-src="{{ comic.url }}" alt="{{ comic.alt }}">
 				</div>
 			</div>
 		</div>
@@ -21,8 +21,8 @@
 			<button type="button" class="btn btn-default" ng-click="marvelComponent.next($event)">Next</button>
 		</form>
 		<div class="col-xs-4" ng-repeat="comic in marvelComponent.comics.results track by comic.id">
-			<div class="comic_container" ng-click="marvelComponent.addFavoriteComic($event, comic)">
-				<img src="{{ comic.images[0].path + '/portrait_xlarge.' + comic.images[0].extension }}" alt="{{comic.title}}">
+			<div class="comic_container" ng-click="marvelComponent.addFavorite($event, comic)">
+				<img ng-src="{{ comic.images[0].path + '/portrait_xlarge.' + comic.images[0].extension }}" alt="{{comic.title}}">
 			</div>
 		</div>
 	</div>

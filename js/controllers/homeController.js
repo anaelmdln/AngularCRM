@@ -2,13 +2,11 @@
 	'use strict';
 	angular.module('NgApp').controller('HomeController', HomeController);
 
-	HomeController.inject = ['UserFactory', 'GiphyFactory'];
+	HomeController.inject = ['UserFactory'];
 
-	function HomeController(UserFactory, GiphyFactory) {
+	function HomeController(UserFactory) {
 		let vm = this;
-		let createBtn = document.getElementById('createBtn');
-		let saveBtn = document.getElementById('saveBtn');
-		let cancelBtn = document.getElementById('cancelBtn');
+		vm.state = 'creating';
 		vm.create = create;
 		vm.edit = edit;
 		vm.save = save;
@@ -30,9 +28,7 @@
 		function edit($event, id) {
 			$event.preventDefault();
 			UserFactory.edit(id).then(user => vm.input_user = user);
-			createBtn.setAttribute('disabled', 'disabled');
-			saveBtn.removeAttribute('disabled');
-			cancelBtn.removeAttribute('disabled');
+			vm.state = 'editing';
 		}
 
 		function save($event, user) {
@@ -41,6 +37,7 @@
 				let index = vm.users.findIndex(item => item.id == user.id);
 				vm.users[index] = user;
 			});
+			vm.state = 'creating';
 		}
 
 		function remove($event, id) {
@@ -54,9 +51,7 @@
 		function cancel($event, id) {
 			$event.preventDefault();
 			vm.input_user = {};
-			createBtn.removeAttribute('disabled');
-			saveBtn.setAttribute('disabled', 'disabled');
-			cancelBtn.setAttribute('disabled', 'disabled');
+			vm.state = 'creating';
 		}
 	}
 })();

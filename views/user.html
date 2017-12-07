@@ -1,9 +1,9 @@
 <div class="col-xs-3">
 	<h2><a href="#!/">Home</a></h2>
 	<div class="col-xs-12 card">
-		<div class="card_container">
+		<div class="card_container" ng-cloak>
 			<p>{{ usersController.user.name }}</p>
-			<img ng-cloak src="{{ usersController.user.photo }}" alt="Photo of {{ usersController.user.name }}" height="100px">
+			<img ng-src="{{ usersController.user.photo }}" alt="Photo of {{ usersController.user.name }}" height="100px">
 			<p><small>{{ usersController.user.email }}</small></p>
 			<p>Phone: {{ usersController.user.phone }}</p>
 			<p>Description:</p>
@@ -15,10 +15,10 @@
 </div>
 <div class="col-xs-9">
 	<ul class="nav nav-tabs">
-		<li id="show_gifs" class="active" ng-click="usersController.showGifs()"><a>Gifs</a></li>
-		<li id="show_comics" ng-click="usersController.showComics()"><a>Comics</a></li>
+		<li ng-class="(usersController.show === 'gifs') ? 'active' : ''" ng-click="usersController.show = 'gifs'"><a>Gifs</a></li>
+		<li ng-class="(usersController.show === 'comics') ? 'active' : ''" ng-click="usersController.show = 'comics'"><a>Comics</a></li>
 	</ul>
 
-	<giphy-component user="usersController.user"></giphy-component>
-	<marvel-component user="usersController.user"></marvel-component>
+	<giphy-component ng-show="usersController.show === 'gifs'" user="usersController.user" add-favorite-gif="usersController.addFavoriteGif($event, gif)" remove-favorite-gif="usersController.removeFavoriteGif($event, gif)"></giphy-component>
+	<marvel-component ng-show="usersController.show === 'comics'" user="usersController.user" add-favorite-comic="usersController.addFavoriteComic($event, comic)" remove-favorite-comic="usersController.removeFavoriteComic($event, comic)"></marvel-component>
 </div>
