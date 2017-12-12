@@ -1,0 +1,8 @@
+<div class="container comic">
+	<h3><a href="#!/user/{{ comicController.user_id }}">Regresar</a></h3>
+	<h1>{{ comicController.comic.title }}</h1>
+	<p>
+		<img ng-src="{{ comicController.comic.images[0].path + '/portrait_xlarge.' + comicController.comic.images[0].extension }}" alt="{{ comicController.comic.title }}">
+		<span>{{ comicController.comic.description }}</span>
+	</p>
+</div>

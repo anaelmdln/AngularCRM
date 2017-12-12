@@ -20,7 +20,7 @@
 			<button type="button" class="btn btn-default" ng-click="marvelComponent.prev($event)">Prev</button>
 			<button type="button" class="btn btn-default" ng-click="marvelComponent.next($event)">Next</button>
 		</form>
-		<div class="col-xs-4" ng-repeat="comic in marvelComponent.comics.results track by comic.id">
+		<div class="col-xs-6" ng-repeat="comic in marvelComponent.comics.results track by comic.id">
 			<div class="comic_container" ng-click="marvelComponent.addFavorite($event, comic)">
 				<img ng-src="{{ comic.images[0].path + '/portrait_xlarge.' + comic.images[0].extension }}" alt="{{comic.title}}">
 			</div>

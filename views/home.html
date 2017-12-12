@@ -14,26 +14,41 @@
 	</div>
 </div>
 <div class="col-xs-6">
-	<h2>Create user</h2>
-	<form name="input_user_form">
-		<div class="form-group">
-			<label for="name">Name:</label>
-			<input class="form-control" type="text" id="name" ng-model="homeController.input_user.name">
-		</div>
-		<div class="form-group">
-			<label for="email">Email:</label>
-			<input class="form-control" type="text" id="email" ng-model="homeController.input_user.email">
-		</div>
-		<div class="form-group">
-			<label for="phone">Phone:</label>
-			<input class="form-control" type="text" id="phone" ng-model="homeController.input_user.phone">
-		</div>
-		<div class="form-group">
-			<label for="description">Description:</label>
-			<textarea class="form-control" type="text" id="description" ng-model="homeController.input_user.description"></textarea>
-		</div>
-		<button ng-disabled="homeController.state !== 'creating'" type="submit" class="btn btn-primary" ng-click="homeController.create($event, homeController.input_user)">Create</button>
-		<button ng-disabled="homeController.state !== 'editing'" type="button" class="btn btn-success" ng-click="homeController.save($event, homeController.input_user)" disabled="disabled">Save</button>
-		<button ng-disabled="homeController.state !== 'editing'" type="button" class="btn btn-warning" ng-click="homeController.cancel($event)" disabled="disabled">Cancel</button>
-	</form>
+	<ul class="nav nav-tabs">
+		<li ng-class="(homeController.show === 'user_data') ? 'active' : ''" ng-click="homeController.show = 'user_data'"><a>User data</a></li>
+		<li ng-class="(homeController.show === 'gifs') ? 'active' : ''" ng-click="homeController.show = 'gifs'"><a>Gifs</a></li>
+		<li ng-class="(homeController.show === 'comics') ? 'active' : ''" ng-click="homeController.show = 'comics'"><a>Comics</a></li>
+	</ul>
+
+	<giphy-component ng-show="homeController.show === 'gifs'" user="homeController.input_user"></giphy-component>
+	<marvel-component ng-show="homeController.show === 'comics'" user="homeController.input_user"></marvel-component>
+	<div ng-show="homeController.show === 'user_data'" class="col-xs-12">
+		<h2>Create user</h2>
+		<form name="input_user_form">
+			<input type="hidden" ng-model="homeController.input_user.id">
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input class="form-control" type="text" id="name" ng-model="homeController.input_user.name">
+			</div>
+			<div class="form-group">
+				<label for="photo">Photo:</label>
+				<input class="form-control" type="text" id="photo" ng-model="homeController.input_user.photo">
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input class="form-control" type="text" id="email" ng-model="homeController.input_user.email">
+			</div>
+			<div class="form-group">
+				<label for="phone">Phone:</label>
+				<input class="form-control" type="text" id="phone" ng-model="homeController.input_user.phone">
+			</div>
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<textarea class="form-control" type="text" id="description" ng-model="homeController.input_user.description"></textarea>
+			</div>
+		</form>
+	</div>
+	<button ng-disabled="homeController.state !== 'creating'" type="submit" class="btn btn-primary" ng-click="homeController.create($event, homeController.input_user)">Create</button>
+	<button ng-disabled="homeController.state !== 'editing'" type="button" class="btn btn-success" ng-click="homeController.save($event, homeController.input_user)" disabled="disabled">Save</button>
+	<button ng-disabled="homeController.state !== 'editing'" type="button" class="btn btn-warning" ng-click="homeController.cancel($event)" disabled="disabled">Cancel</button>
 </div>

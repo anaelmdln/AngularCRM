@@ -1,13 +1,11 @@
-(function(){
+(function() {
 	'use strict';
 	angular.module('NgApp').component('giphyComponent', {
 		templateUrl: '/js/components/giphyComponent/giphyComponent.html',
 		controller: giphyComponent,
 		controllerAs: 'giphyComponent',
 		bindings: {
-			user: '=',
-			addFavoriteGif: '&',
-			removeFavoriteGif: '&'
+			user: '='
 		}
 	});
 
@@ -24,11 +22,20 @@
 		vm.removeFavorite = removeFavorite;
 
 		function addFavorite($event, gif) {
-			vm.addFavoriteGif({'event': $event, 'gif': gif});
+			if (!vm.user.gifs) vm.user.gifs = [];
+			let index = vm.user.gifs.findIndex(item => item.id == gif.id);
+			if (index !== -1) return null;
+			vm.user.gifs.push({
+				id: gif.id,
+				url: gif.images.preview.mp4,
+				alt: gif.title
+			});
 		}
 
 		function removeFavorite($event, gif) {
-			vm.removeFavoriteGif({'event': $event, 'gif': gif});
+			if (!vm.user.gifs) vm.user.gifs = [];
+			let index = vm.user.gifs.findIndex(item => item.id == gif.id);
+			vm.user.gifs.splice(index, 1);
 		}
 
 		function next($event) {

@@ -19,7 +19,7 @@
 
 		function getPage(page, search) {
 			let offset = limit * (page - 1);
-			let url = api_url + 'api_key=' + api_key + '&q=' + search + '&limit=' + limit + '&offset=' + offset + '&rating=' + rating + '&lang=' + lang;
+			let url = api_url + 'api_key=' + api_key + '&q=' + search + '&limit=' + limit + '&offset=' + offset + '&rating=' + rating + '&lang=' + lang + '$sort=trending';
 			return $http.get(url).then(success, error);
 		}
 

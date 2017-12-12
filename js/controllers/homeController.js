@@ -1,11 +1,12 @@
-(function(){
+(function() {
 	'use strict';
 	angular.module('NgApp').controller('HomeController', HomeController);
 
-	HomeController.inject = ['UserFactory'];
+	HomeController.inject = ['FirebaseFactory', '$scope'];
 
-	function HomeController(UserFactory) {
+	function HomeController(FirebaseFactory, $scope) {
 		let vm = this;
+		vm.show = 'user_data';
 		vm.state = 'creating';
 		vm.create = create;
 		vm.edit = edit;
@@ -16,39 +17,49 @@
 		init();
 
 		function init() {
-			UserFactory.getAll().then(users => vm.users = users);
+			FirebaseFactory.checkAuth(postInit);
+		}
+
+		function postInit(user) {
+			FirebaseFactory.auth(user).then(user => {
+				FirebaseFactory.getAll(updateView);
+			});
+		}
+
+		function updateView(data) {
+			// $scope.$applyAsync(() => {
+				vm.users = JSON.parse(JSON.stringify(data));
+			// });
+			$scope.$applyAsync();
 		}
 
 		function create($event, user) {
 			$event.preventDefault();
-			UserFactory.create(user).then(newUser => {
-				vm.users.push(newUser)});
+			FirebaseFactory.create(user).then(newUser => vm.users.push(newUser));
+			vm.cancel($event);
 		}
 
 		function edit($event, id) {
 			$event.preventDefault();
-			UserFactory.edit(id).then(user => vm.input_user = user);
+			vm.input_user = JSON.parse(JSON.stringify(vm.users.filter(user => user.id == id)[0]));
 			vm.state = 'editing';
 		}
 
 		function save($event, user) {
 			$event.preventDefault();
-			UserFactory.save(user).then(item => {
-				let index = vm.users.findIndex(item => item.id == user.id);
-				vm.users[index] = user;
-			});
-			vm.state = 'creating';
+			FirebaseFactory.save(user, vm.users);
+			vm.cancel($event);
 		}
 
 		function remove($event, id) {
 			$event.preventDefault();
-			UserFactory.remove(id).then(response => {
+			FirebaseFactory.remove(id).then(response => {
 				let index = vm.users.findIndex(item => item.id == id);
 				vm.users.splice(index, 1);
 			});
 		}
 
-		function cancel($event, id) {
+		function cancel($event) {
 			$event.preventDefault();
 			vm.input_user = {};
 			vm.state = 'creating';

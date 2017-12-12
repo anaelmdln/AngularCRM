@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="NgApp">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Learning AngularJS!</title>
@@ -8,10 +9,13 @@
 	<link rel="stylesheet" href="libs/angular-csp.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="container">
 	<div ng-view></div>
 	<!-- Scripts -->
 	<script src="libs/angular.min.js"></script>
+	<script src="libs/firebase.js"></script>
+	<script src="libs/angularfire.min.js"></script>
 	<script src="libs/angular-route.min.js"></script>
 	<!-- Este archivo no existe, debe ser creado con los parámetros del config.example.js -->
 	<script src="js/config.js"></script>
@@ -21,11 +25,14 @@
 	<script src="js/factories/giphyFactory.js"></script>
 	<script src="js/factories/marvelFactory.js"></script>
 	<script src="js/factories/userFactory.js"></script>
+	<script src="js/factories/firebaseFactory.js"></script>
 	<!-- Components -->
 	<script src="js/components/giphyComponent/giphyComponent.js"></script>
 	<script src="js/components/marvelComponent/marvelComponent.js"></script>
 	<!-- Controllers -->
 	<script src="js/controllers/homeController.js"></script>
 	<script src="js/controllers/usersController.js"></script>
+	<script src="js/controllers/comicController.js"></script>
 </body>
+
 </html>
