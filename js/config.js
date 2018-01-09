@@ -14,7 +14,6 @@ let NgAppConfigs = {
 		messagingSenderId: '313121292589'
 	}
 }
-
 // Initialize Firebase
 var config = {
 	apiKey: NgAppConfigs.firebase.apiKey,
