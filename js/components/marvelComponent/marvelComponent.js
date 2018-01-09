@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('NgApp').component('marvelComponent', {
-		templateUrl: '/js/components/marvelComponent/marvelComponent.html',
+		templateUrl: './js/components/marvelComponent/marvelComponent.html',
 		controller: marvelComponent,
 		controllerAs: 'marvelComponent',
 		bindings: {

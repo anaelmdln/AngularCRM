@@ -8,17 +8,17 @@
 		$routeProvider
 		.when('/', {
 			controller: 'HomeController',
-			templateUrl: '/views/home.html',
+			templateUrl: './views/home.html',
 			controllerAs: 'homeController'
 		})
 		.when('/user/:id', {
 			controller: 'UsersController',
-			templateUrl: '/views/user.html',
+			templateUrl: './views/user.html',
 			controllerAs: 'usersController'
 		})
 		.when('/user/:id/comic/:comic_id', {
 			controller: 'ComicController',
-			templateUrl: '/views/comic.html',
+			templateUrl: './views/comic.html',
 			controllerAs: 'comicController'
 		});
 	}

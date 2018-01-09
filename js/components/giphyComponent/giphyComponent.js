@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('NgApp').component('giphyComponent', {
-		templateUrl: '/js/components/giphyComponent/giphyComponent.html',
+		templateUrl: './js/components/giphyComponent/giphyComponent.html',
 		controller: giphyComponent,
 		controllerAs: 'giphyComponent',
 		bindings: {
